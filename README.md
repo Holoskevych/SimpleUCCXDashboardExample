@@ -1,6 +1,7 @@
 #CiscoUCCXDashboardExample
 
-Simple Cisco UCCX Dashboard Example
+Simple Cisco UCCX Dashboard Example using Node.js and Socket.IO
+
 Live Data - All Agent Summary
 
 Clone, install dependencies and start node app.js.

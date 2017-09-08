@@ -1,0 +1,72 @@
+extends layout
+
+block content
+    div(id="title", width="100%", align="center")
+        h1 Live Data - All Agent Summary
+    div(id="server", width="100%", align="center")
+        h2(id="conn")
+    div(id="content", width="100%", align="center")
+        table(id="table" border="1")
+            thead
+                tr
+                    th Agent Name
+                    th Login ID
+                    th Serving CSQ
+                    th Agent Status
+                    th Status Duration
+                    th Reason Code
+                    th Assigned CSQs
+
+            tbody(id="data-update")
+
+    script(src="socket.io/socket.io.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+    script.
+        //var conmessage = {"on" : "Connected to server. Realtime data flow enabled", "off" : "Disconnected from server. Realtime data flow disabled"};
+        var socket = io.connect();
+        socket.on('connect', function () {
+            //console.log("Connected to server. Realtime data flow enabled");
+            $("#conn").text("Connected to server. Realtime data flow enabled").css('color', 'green');;
+        });
+        socket.on('disconnect', function () {
+            $("#conn").text("Disconnected from server. Reconnecting").css('color', 'red');
+            //console.log("Disconnected from server. Reconnecting");
+        });
+            socket.on('FromAPI', function (data) {
+                updateView(data);
+                //console.log("Got API data from server");
+                });
+        function updateView(data) {
+            $("#data-update").empty();
+            $.each(data, function (i,data) {
+                var tr = $("<tr>");
+                var td = $("<td>");
+                tr.append(
+                    $('<td>').text(data.VoiceCSQDetailsStats.agentName),
+                    $('<td>').text(data.VoiceCSQDetailsStats.agentId),
+                    $('<td>').text(data.VoiceCSQDetailsStats.skillGroup),
+                    $('<td>').text(data.VoiceCSQDetailsStats.agentState),
+                    $('<td>').text(msToTime(data.VoiceCSQDetailsStats.agentStateDuration)),
+                    $('<td>').text(data.VoiceCSQDetailsStats.reasonCode))
+                        $.each(data.VoiceCSQDetailsStats.AgentVoiceCSQNames, function (CSQNameid, subdata) {
+                            var ul = $("<ul>");
+                            ul.append(
+                                $('<li>').text(subdata.agentVoiceCSQName)
+                            )
+                            td.append(ul.css("font-size", 8));
+                        })
+                tr.append(td);
+                $("#data-update").append(tr);})
+            //console.log("Table updated");
+        }
+        function msToTime(duration) {
+            var milliseconds = parseInt((duration % 1000) / 100)
+                , seconds = parseInt((duration / 1000) % 60)
+                , minutes = parseInt((duration / (1000 * 60)) % 60)
+                , hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+            return hours + ":" + minutes + ":" + seconds;
+        }

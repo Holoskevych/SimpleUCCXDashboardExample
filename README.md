@@ -11,4 +11,4 @@ By default Dashboard gets data from Cisco dCloud Labs.
 
 Go to http://<- your ip address ->:3000/VoiceCSQDetailsStats.
 
-![alt text](https://user-images.githubusercontent.com/31503217/30207258-9156446e-9497-11e7-9d40-8883de4ed8f0.png)
+![alt text](https://user-images.githubusercontent.com/31503217/30311731-58fa457e-979f-11e7-8f1f-646f01be6804.gif)

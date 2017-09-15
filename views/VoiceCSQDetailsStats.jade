@@ -49,8 +49,8 @@ block content
         function updateView(data) {
             $("#data-update").empty();
             $.each(data, function (i,data) {
-                var tr = $(<tr>);
-                var td = $("<td>");
+                var tr = $('<tr>');
+                var td = $('<td>');
                 tr.append(
                     $('<td>').text(data.VoiceCSQDetailsStats.agentName),
                     $('<td>').text(data.VoiceCSQDetailsStats.agentId),

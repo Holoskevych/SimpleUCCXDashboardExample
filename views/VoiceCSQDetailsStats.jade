@@ -1,11 +1,9 @@
 extends layout
 
 block content
-    div(id="title", width="100%", align="center")
-        h1 Live Data - All Agent Summary
-    div(id="server", width="100%", align="center")
-        h2(id="conn")
-    div(id="content", width="100%", align="center")
+    div(id="title", align="center")
+        h1 Live Agents Summary
+    div(id="content", align="center")
         table(id="table" border="1")
             thead
                 tr
@@ -18,28 +16,40 @@ block content
                     th Assigned CSQs
 
             tbody(id="data-update")
+    div(class="conn", id="server", align="center")
+        p(id="conn") Connecting to server...
 
-    script(src="socket.io/socket.io.js")
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
     script.
         //var conmessage = {"on" : "Connected to server. Realtime data flow enabled", "off" : "Disconnected from server. Realtime data flow disabled"};
         var socket = io.connect();
+        console.log("Starting SocketIO");
         socket.on('connect', function () {
-            //console.log("Connected to server. Realtime data flow enabled");
-            $("#conn").text("Connected to server. Realtime data flow enabled").css('color', 'green');;
+            console.log("Connected to server. Realtime data flow disabled. Connecting to UCCX Server");
+            $("#conn").text("Connected to server. Realtime data flow disabled. Connecting to UCCX Server").css('color', '#D2691E');
         });
         socket.on('disconnect', function () {
             $("#conn").text("Disconnected from server. Reconnecting").css('color', 'red');
             //console.log("Disconnected from server. Reconnecting");
         });
-            socket.on('FromAPI', function (data) {
+        socket.on('FromAPI', function (data) {
+            if (data != 'Error') {
+                console.log('data_if:' + data);
+                $("#conn").text("Connected to server. Realtime data flow enabled").css('color', 'green');
+                console.log("Connected to server. Realtime data flow enabled");
+                console.log("Start updating");
                 updateView(data);
-                //console.log("Got API data from server");
-                });
+                console.log("Got API data from server");
+            } else {
+                console.log('data_if_else' + data);
+                console.log("Connected to server. Realtime data flow disabled. Cant connnect to UCCX Server");
+                $("#conn").text("Connected to server. Realtime data flow disabled. Cant connnect to UCCX Server").css('color', '#D2691E');
+
+            }
+        });
         function updateView(data) {
             $("#data-update").empty();
             $.each(data, function (i,data) {
-                var tr = $("<tr>");
+                var tr = $(<tr>);
                 var td = $("<td>");
                 tr.append(
                     $('<td>').text(data.VoiceCSQDetailsStats.agentName),
@@ -49,11 +59,9 @@ block content
                     $('<td>').text(msToTime(data.VoiceCSQDetailsStats.agentStateDuration)),
                     $('<td>').text(data.VoiceCSQDetailsStats.reasonCode))
                         $.each(data.VoiceCSQDetailsStats.AgentVoiceCSQNames, function (CSQNameid, subdata) {
-                            var ul = $("<ul>");
-                            ul.append(
-                                $('<li>').text(subdata.agentVoiceCSQName)
-                            )
-                            td.append(ul.css("font-size", 8));
+                            var p = $("<p>");
+                            p.text(subdata.agentVoiceCSQName);
+                            td.append(p.css("font-size", 9));
                         })
                 tr.append(td);
                 $("#data-update").append(tr);})

@@ -1,0 +1,282 @@
+extends layout
+
+block content
+    div(class="main-right")
+        div(class="icon-menu-right")
+            img(src="images/menu-ham-icon.png")
+    div(class="menu-right")
+        div(class="icon-close-right")
+            img(src="images/close-btn.png")
+        ul
+            li
+                p Options
+            li
+                select(name="drop_down_csq" id="dropDownCSQ")
+                    option(value="None" selected="Selected") Loading CSQs...
+    div(class="contentheader")
+        h4 Live CSQ Summary
+    div(class="contentheader")
+        h4(id="csq_id") None
+    div(class="content")
+        div(class="widgetnew")
+            div(class="widgettop") Queue Stats
+            div(class="widgetbottom")
+                div(id="myChartgauge" style="width:300px;height:300px;")
+        div(class="widgetnew")
+            div(class="widgettop") Agent Statistics
+            div(class="widgetbottom")
+                div(id="myChartpie" style="width:600px;height:300px;")
+        div(class="widgetnew")
+            div(class="widgettop") Resources Logged In
+            div(class="widgetbottom" id="nResourcesLoggedIn") 0
+        div(class="widgetnew")
+            div(class="widgettop") Total Contacts
+            div(class="widgetbottom" id="nTotalContacts") 0
+        div(class="widgetnew")
+            div(class="widgettop") Handled Contacts
+            div(class="widgetbottom" id="nHandledContacts") 0
+        div(class="widgetnew")
+            div(class="widgettop") Abandoned Contacts
+            div(class="widgetbottom" id="nAbandonedContacts") 0
+        div(class="widgetnew")
+            div(class="widgettop") Dequeued Contacts
+            div(class="widgetbottom" id="nDequeuedContacts") 0
+        div(class="widgetnew")
+            div(class="widgettop") Avg Talk Duration
+            div(class="widgetbottom" id="avgTalkDuration") 00:00:00
+        div(class="widgetnew")
+            div(class="widgettop") Longest Talk Duration
+            div(class="widgetbottom" id="longestTalkDuration") 00:00:00
+        div(class="widgetnew")
+            div(class="widgettop") Avg Wait Duration
+            div(class="widgetbottom" id="avgWaitDuration") 00:00:00
+        div(class="widgetnew")
+            div(class="widgettop") Longest Wait Duration
+            div(class="widgetbottom" id="longestWaitDuration") 00:00:00
+        div(class="widgetnew")
+            div(class="widgettop") Longest Currently Waiting Duration
+            div(class="widgetbottom" id="longestCurrentlyWaitingDuration") 00:00:00
+
+    div(class="conn", id="server", align="center")
+        p(id="conn") Connecting to server...
+
+    script.
+        // based on prepared DOM, initialize echarts instance
+        var myChartpie = echarts.init(document.getElementById('myChartpie'));
+        // specify chart configuration item and data
+        var optionpie = {
+            tooltip: {
+                trigger: "item",
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            label: {
+                normal: {
+                    formatter: "{b} ({d}%)",
+                    position: "insideTopRight"
+                }
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'right',
+                y: 'top',
+                //padding: [30, 30,30, 30],
+                data: ['Ready', 'Talking', 'Not Ready', 'Working', 'Reserved'],
+                formatter: function (namepie) {
+                    var oa = optionpie.series[0].data;
+
+                    var num = oa[0].value + oa[1].value + oa[2].value + oa[3].value;
+                    for (var i = 0; i < optionpie.series[0].data.length; i++) {
+                        if (namepie == oa[i].name) {
+                            return namepie + '     ' + oa[i].value + '     ' + (oa[i].value / num * 100).toFixed(0) + '%';
+                        }
+                    }
+                }
+            },
+            title: {
+                text: 'Logged In 0',
+                //subtext: '0',
+                left: '32%',
+                top: 'center',
+                textStyle: {
+
+                    fontWeight: 'bold',
+                    fontSize: 14,
+                    color: '#606060'
+                },
+                subtextStyle: {
+
+                    fontWeight: 'bold',
+                    fontSize: 16,
+                    color: '#606060'
+                }
+            },
+            series: [
+                {
+                    name: 'Agent Status',
+                    type: 'pie',
+                    radius: ['40%', '75%'],
+                    center: ['40%', '50%'],
+                    roseType: 'angle',
+                    data: [
+                        {value: 0, name: 'Ready'},
+                        {value: 0, name: 'Talking'},
+                        {value: 0, name: 'Not Ready'},
+                        {value: 0, name: 'Working'},
+                        {value: 0, name: 'Reserved'}
+                    ]
+                }
+            ],
+            color: ['#7CBB55','#E98E2C', '#E43F3D', '#d48265', '#91c7ae']
+        };
+        // use configuration item and data specified to show chart
+        myChartpie.setOption(optionpie);
+
+        var myChartgauge = echarts.init(document.getElementById('myChartgauge'));
+        optiongauge = {
+            tooltip: {
+                formatter: "{a} <br/>Voice calls : {c}"
+            },
+            series: [
+                {
+                    name: 'Queue',
+                    type: 'gauge',
+                    max: '10',
+                    splitNumber: 5,
+                    radius: '80%',
+                    axisTick: {
+                        splitNumber: 5,
+                        length: 15,
+                        lineStyle: {
+                            color: 'auto'
+                        }
+                    },
+                    axisLabel: {
+                        show:false
+                    },
+                    pointer: {
+                        width: 5
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            width: 10,
+                            color: [[0.2, '#7CBB55'],[0.4, '#7CBB55'],[0.6, '#7CBB55'],[0.8, '#E98E2C'],[1, '#E43F3D']]
+                        }
+                    },
+                    detail: {
+                        formatter: '{value}',
+                        padding: [50, 0, 0, 0]
+                        //offsetCenter: '10%'
+                        //show: false
+                    },
+                    data: [{value: 0, name: 'Queue'}]
+                }
+            ]
+        };
+        myChartgauge.setOption(optiongauge);
+
+    script.
+        //var conmessage = {"on" : "Connected to server. Realtime data flow enabled", "off" : "Disconnected from server. Realtime data flow disabled"};
+        var socket = io.connect();
+        console.log("Starting SocketIO");
+        socket.on('connect', function () {
+            console.log("Connected to server. Realtime data flow disabled. Connecting to UCCX Server");
+            $("#conn").text("Connected to server. Realtime data flow disabled. Connecting to UCCX Server").css('color', '#D2691E');
+        });
+        socket.on('disconnect', function () {
+            $("#conn").text("Disconnected from server. Reconnecting").css('color', 'red');
+            //console.log("Disconnected from server. Reconnecting");
+        });
+        socket.on('FromAPIGetVoiceIAQStats', function (data) {
+            if (data != 'Error') {
+                console.log('data_if:' + data);
+                $("#conn").text("Connected to server. Realtime data flow enabled").css('color', 'green');
+                console.log("Connected to server. Realtime data flow enabled");
+                console.log("Start updating");
+                updateView(data);
+                console.log("Got API data from server");
+            } else {
+                console.log('data_if_else' + data);
+                console.log("Connected to server. Realtime data flow disabled. Cant connnect to UCCX Server");
+                $("#conn").text("Connected to server. Realtime data flow disabled. Cant connnect to UCCX Server").css('color', '#D2691E');
+
+            }
+        });
+        function updateView(data) {
+            // Get Dropdown selected item
+            var selecteditem = $("#dropDownCSQ").find(":selected").text();
+            if (selecteditem == "Loading CSQs...") {
+                //console.log("Changing first select option to " + data[0].id);
+                selecteditem = data[0].id;
+                $("#dropDownCSQ").empty();
+                $.each(data, function (key, val) {
+                    $("#dropDownCSQ").append('<option id="' + val.id + '">' + val.id + '</option>');
+                })
+                $("#dropDownCSQ").find(":selected").text(selecteditem);
+            }
+            //console.log("Selected item: " + selecteditem);
+            //Working with data
+            $.each(data, function (i,alldata) {
+                //console.log(alldata.id);
+                if (alldata.id == selecteditem) {
+                    $.each(alldata, function (n, obj) {
+                        //CSQ
+                        $("#csq_id").text(obj.esdName);
+                        //Contacts
+                        $("#nTotalContacts").text(obj.nTotalContacts);
+                        $("#nHandledContacts").text(obj.nHandledContacts);
+                        $("#nAbandonedContacts").text(obj.nAbandonedContacts);
+                        $("#nDequeuedContacts").text(obj.nDequeuedContacts);
+                        //Duration
+                        $("#longestTalkDuration").text(msToTime(obj.longestTalkDuration));
+                        $("#avgTalkDuration").text(msToTime(obj.avgTalkDuration));
+                        $("#avgWaitDuration").text(msToTime(obj.avgWaitDuration));
+                        $("#longestWaitDuration").text(msToTime(obj.longestWaitDuration));
+                        $("#longestCurrentlyWaitingDuration").text(msToTime(obj.longestCurrentlyWaitingDuration));
+                        //Resource
+                        $("#nResourcesLoggedIn").text(obj.nResourcesLoggedIn);
+                        $("#nAvailResources").text(obj.nAvailResources);
+                        $("#nInSessionResources").text(obj.nInSessionResources);
+                        $("#nUnavailResources").text(obj.nUnavailResources);
+                        $("#nWorkResources").text(obj.nWorkResources);
+                        $("#nSelectedResources").text(obj.nSelectedResources);
+
+                        //Chart Data
+                        optionpie.title.text = "Logged In " + obj.nResourcesLoggedIn;
+                        optionpie.series[0].data[0].value = obj.nAvailResources;
+                        optionpie.series[0].data[1].value = obj.nInSessionResources;
+                        optionpie.series[0].data[2].value = obj.nUnavailResources;
+                        optionpie.series[0].data[3].value = obj.nWorkResources;
+                        optionpie.series[0].data[4].value = obj.nSelectedResources;
+                        optiongauge.series[0].data[0].value = obj.nWaitingContacts;
+
+                        myChartpie.setOption(optionpie, true);
+                        myChartgauge.setOption(optiongauge, true);
+                        //console.log(obj.esdName);
+                    })
+                }
+            });
+            //console.log("All data updated");
+        }
+        function msToTime(duration) {
+            var milliseconds = parseInt((duration % 1000) / 100)
+                , seconds = parseInt((duration / 1000) % 60)
+                , minutes = parseInt((duration / (1000 * 60)) % 60)
+                , hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+            return hours + ":" + minutes + ":" + seconds;
+        }
+    script.
+        $('.icon-menu-right').click(function () {
+            $('.menu-right').animate({
+                right: '0px'
+            }, 200);
+        });
+        $('.icon-close-right').click(function () {
+
+            $('.menu-right').animate({
+                right: '-285px'
+            }, 200);
+        });

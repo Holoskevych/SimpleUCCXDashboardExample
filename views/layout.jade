@@ -3,5 +3,67 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/echarts/3.7.1/echarts.js")
+    script(src="socket.io/socket.io.js")
   body
+    div(class="menu")
+      div(class="icon-close")
+        img(src="images/close-btn.png")
+      ul
+        li
+          a(href='/') Home
+        li
+          a(href='/VoiceIAQStats') Live CSQ Summary
+        li
+          a(href='/VoiceCSQDetailsStats') Live Agents Summary
+        li
+          a Settings
+    div(class="main")
+      div(class="icon-menu")
+        img(src="images/menu-ham-icon.png")
     block content
+  script.
+      $('.icon-menu').click(function () { /* выбираем класс icon-menu и
+       добавляем метод click с функцией, вызываемой при клике */
+
+          $('.menu').animate({ //выбираем класс menu и метод animate
+
+              left: '0px' /* теперь при клике по иконке, меню, скрытое за
+             левой границей на 285px, изменит свое положение на 0px и станет видимым */
+
+          }, 200); //скорость движения меню в мс
+
+          $('body').animate({ //выбираем тег body и метод animate
+
+              left: '285px' /* чтобы всё содержимое также сдвигалось вправо
+             при открытии меню, установим ему положение 285px */
+
+          }, 200); //скорость движения меню в мс
+          $('main').animate({ //выбираем тег body и метод animate
+
+              left: '285px' /* чтобы всё содержимое также сдвигалось вправо
+               при открытии меню, установим ему положение 285px */
+
+          }, 200); //скорость движения меню в мс
+      });
+
+
+      /* Закрытие меню */
+
+      $('.icon-close').click(function () { //выбираем класс icon-close и метод click
+
+          $('.menu').animate({ //выбираем класс menu и метод animate
+
+              left: '-285px' /* при клике на крестик меню вернется назад в свое
+             положение и скроется */
+
+          }, 200); //скорость движения меню в мс
+
+          $('body').animate({ //выбираем тег body и метод animate
+
+              left: '0px' //а содержимое страницы снова вернется в положение 0px
+
+          }, 200); //скорость движения меню в мс
+      });

@@ -1,5 +1,198 @@
+@import 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css';
 body
-  padding: 50px
+  left: 0;
+  margin: 0;
+  position: relative;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
-a
-  color: #00B7FF
+  background #f1f1f1
+p {
+  font: 14px/1 'Open Sans', sans-serif;
+  color: #333;
+}
+a {
+  color: #333;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+h2 {
+  font: 600 20px/1 'Open Sans', sans-serif;
+  color: #888
+  margin: 20px 0;
+}
+h3 {
+  font: 600 15px/1 'Open Sans', sans-serif;
+  color: #999
+  margin: 20px 0;
+}
+h4 {
+  font: 600 30px/1 'Open Sans', sans-serif;
+  color: #444
+  margin: 20px 0;
+}
+.menu
+  background: #606060
+  left: -285px; /* прячем меню */
+  height: 100%
+  position: fixed
+  width: 285px
+
+.menu ul
+  border-top: 1px solid #555
+  list-style: none
+  margin: 0
+  padding: 0
+.menu li
+  border-bottom: 1px solid #555
+  font-family: 'Open Sans', sans-serif
+  line-height: 45px
+  padding-bottom: 3px
+  padding-left: 20px
+  padding-top: 3px
+.menu li:hover {
+  cursor: pointer;
+  background-color: #555;
+}
+
+.menu a {
+  color: #fff;
+  font-size: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.menu-right
+  background: #606060
+  right -285px; /* прячем меню */
+  height: 100%
+  position: fixed
+  width: 285px
+
+.menu-right ul
+  border-top: 1px solid #555
+  list-style: none
+  margin: 0
+  padding: 0
+.menu-right li
+  border-bottom: 1px solid #555
+  font-family: 'Open Sans', sans-serif
+  line-height: 45px
+  padding-bottom: 3px
+  padding-left: 20px
+  padding-top: 3px
+.menu-right li:hover {
+  cursor: pointer;
+  background-color: #555;
+}
+
+.menu-right p {
+  color: #fff;
+  font-size: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.icon-close {
+  cursor: pointer;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 6px;
+}
+.icon-close-right {
+  cursor: pointer;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 6px;
+}
+.icon-menu {
+  float:left;
+  color: #555555;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  padding-bottom: 25px;
+  padding-left: 25px;
+  padding-top: 25px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.icon-menu-right {
+  float:right;
+  color: #555555;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  padding-bottom: 25px;
+  padding-right: 25px;
+  padding-top: 25px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.icon-menu img {
+  margin-right: 5px;
+  cursor: pointer;
+}
+.icon-menu-right img {
+  margin-left: 5px;
+  cursor: pointer;
+}
+.main
+  height: 100%;
+  text-align:center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+.main-right
+  height: 100%;
+  text-align:center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+.contentheader
+  width 100%
+  margin 0 auto
+  flex-wrap wrap
+  text-align center
+.content
+  max-width 1260px
+  margin 0 0
+  padding 0 0
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+  //width: 100%;
+  //margin: 0;
+  flex-direction: row;
+  justify-content space-around
+.widgetnew
+  flex 0 0 256px
+  box-sizing border-box
+  padding 10px 10px
+  margin 10px 10px
+  background #fff
+  box-shadow 0 3px 2px rgba(0, 0, 0, 0.1)
+  text-align center
+  border-radius: 4px;
+.widgettop
+  font-size: 16px;
+  background:rgba(#a693eb,.5);
+  padding:20px;
+  box-sizing:border-box;
+.widgetbottom
+  font-size: 48px;
+  height auto
+  background:rgba(#fff,.5);
+  padding:20px;
+  box-sizing:border-box;
+.dashboardname
+  text-align center
+.selectbox
+  text-align center
+  padding 10px
+.disabled
+  display none
+.chart
+  width: 80%
+  margin: 15px auto
+

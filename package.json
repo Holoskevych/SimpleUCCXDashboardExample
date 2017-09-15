@@ -1,16 +1,19 @@
 {
   "name": "newprojectjadestylus",
-  "version": "0.0.1",
+  "version": "0.2.1",
   "private": false,
   "scripts": {
     "start": "node ./app.js"
   },
   "dependencies": {
     "body-parser": "~1.16.0",
+    "chart.js": "^2.7.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
+    "echarts": "^3.7.1",
     "express": "~4.14.1",
     "jade": "~1.11.0",
+    "jqplot": "^1.0.9",
     "jquery": "^3.2.1",
     "morgan": "~1.7.0",
     "request": "^2.81.0",

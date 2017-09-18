@@ -4,17 +4,19 @@ Simple UCCX Dashboard Example
 
 This is an example of simple UCCX Live Dashboard using Node.js and Socket.IO
 
-Clone https://github.com/Holoskevych/Simple-UCCX-Dashboard-Example.git
+Installation:
+git clone https://github.com/Holoskevych/Simple-UCCX-Dashboard-Example.git
 
-Install dependencies
+cd SimpleUCCXDashboardExample
 
-Start node app.js
+npm i
+
+node app.js
 
 
 Go to http://localhost:3000/
 
 Click top left menu button to choose Dashboard.
-
 
 
 ![home](https://user-images.githubusercontent.com/31503217/30540217-d522effa-9c7e-11e7-95f2-acbb9fe6b88a.png)

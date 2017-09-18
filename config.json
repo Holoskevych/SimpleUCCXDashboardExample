@@ -1,6 +1,7 @@
 {
-  "adminusername" : "administrator",
-  "adminpassword" : "C1sco12345",
-  "uccxipaddr" : "198.18.133.19",
-  "serverport" : "3000"
+  "adminusername": "administrator",
+  "adminpassword": "C1sco12345",
+  "puccxipaddr": "198.18.133.19",
+  "succxipaddr": "",
+  "serverport": "3000"
 }

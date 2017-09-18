@@ -1,0 +1,51 @@
+extends layout
+
+block content
+    div(id="title", align="center")
+        h2 Settings
+    div(id="content", align="center")
+        div(class="widgetnew")
+            p Primary UCCX IP Address
+            input(id="ValuePIPAddr", type="text", size="25", value="#{puccxipaddr}")
+            p Secondary UCCX IP Address
+            input(id="ValueSIPAddr", type="text", size="25", value="#{succxipaddr}" disabled)
+            p(id="alertmessage")
+            input(id="UpdatePIPAddr", type="submit" value="Update")
+        div(class="widgetnew")
+            p UCCX Administration Credentials
+            input(type="text", size="25", value="#{adminusername}" disabled)
+            input(type="text", size="25", value="#{adminpassword}" disabled)
+            input(type="submit" value="Update" disabled)
+        div(class="widgetnew")
+            p UCCX Reporting Credentials
+            input(type="text", size="25", value="" disabled)
+            input(type="text", size="25", value="" disabled)
+            input(type="submit" value="Update" disabled)
+        div(class="widgetnew")
+            p Server maintenance
+            input(type="submit" value="Reload Dashboard Service" disabled)
+            input(type="submit" value="Reload Dashboard Server" disabled)
+
+    script.
+        $('#UpdatePIPAddr').click(function () {
+            var ValueIPAddrs = {};
+            ValueIPAddrs.puccxipaddr = $("#ValuePIPAddr").val();
+            ValueIPAddrs.succxipaddr = $("#ValueSIPAddr").val();
+
+            $.ajax({
+                url: '/settings/api/update/uccxipaddrs',
+                type: 'PUT',
+
+                dataType: 'json',
+                data: ValueIPAddrs,
+                success: function (data, textStatus, xhr) {
+                    console.log("Success");
+                    console.log(data);
+                    $("#alertmessage").text("Please, reload Dashboard Node Service").css('color', 'red');
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error");
+                    console.log(xhr.responseText);
+                }
+            });
+        });

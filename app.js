@@ -10,6 +10,7 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 const VoiceCSQDetailsStats = require('./routes/VoiceCSQDetailsStats');
 const VoiceIAQStats = require('./routes/VoiceIAQStats');
+const settings = require('./routes/Settings');
 
 const config = require('./config.json');
 const port = process.env.PORT || config.serverport;
@@ -39,6 +40,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/VoiceCSQDetailsStats', VoiceCSQDetailsStats);
 app.use('/VoiceIAQStats', VoiceIAQStats);
+app.use('/Settings', settings);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

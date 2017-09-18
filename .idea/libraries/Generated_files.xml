@@ -3,6 +3,7 @@
     <properties>
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/dist/routes/VoiceIAQStats.js" />
+        <item url="file://$PROJECT_DIR$/dist/routes/settings.js" />
         <item url="file://$PROJECT_DIR$/dist/api.js" />
         <item url="file://$PROJECT_DIR$/dist/routes/index.js" />
         <item url="file://$PROJECT_DIR$/dist/routes/VoiceCSQDetailsStats.js" />
@@ -11,6 +12,7 @@
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/dist/routes/VoiceIAQStats.js" />
+      <root url="file://$PROJECT_DIR$/dist/routes/settings.js" />
       <root url="file://$PROJECT_DIR$/dist/api.js" />
       <root url="file://$PROJECT_DIR$/dist/routes/index.js" />
       <root url="file://$PROJECT_DIR$/dist/routes/VoiceCSQDetailsStats.js" />

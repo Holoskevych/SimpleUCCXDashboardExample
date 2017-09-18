@@ -1,8 +1,8 @@
 const request = require('request'); // require in request
 const config = require('./config.json');
 
-const initGetVoiceCSQDetailsStats = {uri: 'http://' + config.uccxipaddr + ':9080/realtime/VoiceCSQDetailsStats'};
-const initGetVoiceIAQStats = {uri: 'http://' + config.uccxipaddr + ':9080/realtime/VoiceIAQStats'};
+const initGetVoiceCSQDetailsStats = {uri: 'http://' + config.puccxipaddr + ':9080/realtime/VoiceCSQDetailsStats'};
+const initGetVoiceIAQStats = {uri: 'http://' + config.puccxipaddr + ':9080/realtime/VoiceIAQStats'};
 
 const apiCaller = function (url, cb) {
     //use request to make the external http call to the JSON api

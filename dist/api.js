@@ -3,8 +3,8 @@
 var request = require('request'); // require in request
 var config = require('./config.json');
 
-var initGetVoiceCSQDetailsStats = { uri: 'http://' + config.uccxipaddr + ':9080/realtime/VoiceCSQDetailsStats' };
-var initGetVoiceIAQStats = { uri: 'http://' + config.uccxipaddr + ':9080/realtime/VoiceIAQStats' };
+var initGetVoiceCSQDetailsStats = { uri: 'http://' + config.puccxipaddr + ':9080/realtime/VoiceCSQDetailsStats' };
+var initGetVoiceIAQStats = { uri: 'http://' + config.puccxipaddr + ':9080/realtime/VoiceIAQStats' };
 
 var apiCaller = function apiCaller(url, cb) {
     //use request to make the external http call to the JSON api

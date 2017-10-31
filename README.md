@@ -1,23 +1,27 @@
+<!--
+  Title: Simple-UCCX-Dashboard-Example
+  Description: Simple UCCX Live Dashboard using Node.js and Socket.IO for Cisco UCCX
+  Author: Holoskevych
+-->
 # Simple-UCCX-Dashboard-Example
-Simple UCCX Dashboard Example
 
 
-This is an example of simple UCCX Live Dashboard using Node.js and Socket.IO
+This is an example of simple UCCX Live Dashboard using Node.js and Socket.IO. It was tested with 10.x and 11.x versions.
 
-Installation:
+## Installation:
 
-git clone https://github.com/Holoskevych/Simple-UCCX-Dashboard-Example.git
+'git clone https://github.com/Holoskevych/Simple-UCCX-Dashboard-Example.git'
 
-cd SimpleUCCXDashboardExample
+'cd SimpleUCCXDashboardExample'
 
-npm i
+'npm i'
 
-node app.js
+'node app.js'
 
 
-Go to http://localhost:3000/
+Go to 'http://localhost:3000/'
 
-Click top left menu button to choose Dashboard.
+Click top left menu button to choose Dashboard, right menu for selecting CSQ.
 
 
 ![home](https://user-images.githubusercontent.com/31503217/30540217-d522effa-9c7e-11e7-95f2-acbb9fe6b88a.png)

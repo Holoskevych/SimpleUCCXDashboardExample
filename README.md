@@ -1,12 +1,13 @@
 <!--
-  Title: Simple-UCCX-Dashboard-Example
-  Description: Simple UCCX Live Dashboard using Node.js and Socket.IO for Cisco UCCX
+  Title: Simple UCCX Dashboard Example
+  Description: Simple UCCX Live Dashboard using Node.js and Socket.IO for Cisco UCCX Contact Center
   Author: Holoskevych
 -->
 # Simple-UCCX-Dashboard-Example
 
 
-This is an example of simple UCCX Live Dashboard using Node.js and Socket.IO. It was tested with 10.x and 11.x versions.
+This is an example of simple **UCCX Live Dashboard** using **Node.js** and **Socket.IO**. It was tested with 10.x and 11.x versions.
+
 
 ## Installation:
 

@@ -10,16 +10,16 @@ This is an example of simple UCCX Live Dashboard using Node.js and Socket.IO. It
 
 ## Installation:
 
-'git clone https://github.com/Holoskevych/Simple-UCCX-Dashboard-Example.git'
+- `git clone https://github.com/Holoskevych/Simple-UCCX-Dashboard-Example.git`
 
-'cd SimpleUCCXDashboardExample'
+- `cd SimpleUCCXDashboardExample`
 
-'npm i'
+- `npm i`
 
-'node app.js'
+- `node app.js`
 
 
-Go to 'http://localhost:3000/'
+Go to `http://localhost:3000/`
 
 Click top left menu button to choose Dashboard, right menu for selecting CSQ.
 
